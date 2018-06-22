@@ -1,8 +1,8 @@
 import time
 from collections import OrderedDict
 from datetime import date, datetime
-from operator import itemgetter
 from json import JSONDecodeError
+from operator import itemgetter
 
 import fr24
 
@@ -11,8 +11,13 @@ def main():
     total = 0
     TPE = {}
     try:
-        bound = '38.00,20.50,103.50,142.60'
-        j = fr24.area(bound)
+        bound = '40.00,18.50,100.00,144.60'
+        north = fr24.area(bound)
+        bound = '26.20,1.50,100.00,144.60'
+        south = fr24.area(bound)
+        j = {**north, **south}
+        print(len(j))
+        
         for k, v in j.items():
             if k == 'full_count' or k == 'version' or k == 'stats' or k == 'visible' or k == 'selected-aircraft':
                 continue
@@ -53,4 +58,4 @@ def main():
 if __name__ == '__main__':
     while True:
         main()
-        time.sleep(60)
+        time.sleep(180)
