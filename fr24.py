@@ -13,11 +13,6 @@ headers = {
     'Connection': 'keep-alive',
 }
 
-# https://data-live.flightradar24.com/zones/fcgi/feed.js?
-# bounds=44.77,14.02,99.12,163.28&
-# faa=0&satellite=1&mlat=0&flarm=0&adsb=1&gnd=0&air=1&vehicles=0&estimated=1&maxage=14400&gliders=0&stats=1
-# &enc=qPgPtpctGA0YZPTS9NF_mD6QVwq27mkhfOawf2qaSh4&to=TPE
-
 
 def area(bounds):
     params = (
@@ -82,7 +77,7 @@ def detail(bounds, ix):
         pass
 
 
-def arr_time(ix):
+def arrtime(ix):
     params = (
         ('version', '1.5'),
         ('flight', ix),

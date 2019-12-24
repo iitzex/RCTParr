@@ -30,7 +30,7 @@ def main():
             src = v[11]
             callsign = v[16]
 
-            ts = fr24.arr_time(k)
+            ts = fr24.arrtime(k)
             if ts:
                 t = {callsign: [int(ts), level]}
                 TPE.update(t)
@@ -44,8 +44,7 @@ def main():
 
             for k, v in TPE.items():
                 arr = datetime.fromtimestamp(v[0])
-                # msg = f'{k:9s} {arr.hour}:{arr.minute}'
-                msg = f'{k:9s} {arr.time()}, {v[0]}'
+                msg = f'{k:9s} {arr.time()}, {v[0]} :{v[1]}'
                 f.write(msg+'\n')
                 print(msg)
 
@@ -54,4 +53,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    while(True):
+        main()
+        time.sleep(100)
