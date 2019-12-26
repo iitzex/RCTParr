@@ -26,13 +26,12 @@ def main():
             dst = v[12]
             lat = float(v[1])
             lon = float(v[2])
-            # level = int(v[4])
             src = v[11]
             callsign = v[16]
 
             ts = fr24.arrtime(k)
             if ts:
-                t = {callsign: [int(ts), level]}
+                t = {callsign: [int(ts), level, lat, lon]}
                 TPE.update(t)
                 # print(t)
                 print('.', end='', flush=True)
@@ -44,7 +43,13 @@ def main():
 
             for k, v in TPE.items():
                 arr = datetime.fromtimestamp(v[0])
-                msg = f'{k:9s} {arr.time()}, {v[0]} :{v[1]}'
+                msg = ''
+                if v[2] > 25.08:
+                    direction = 'N'
+                    msg = f'{"":9s}|{k:<9s} {arr.time()}, {direction} :{v[1], v[2], v[3]}'
+                else:
+                    direction = 'S'
+                    msg = f'{k:>9s}|{"":9s} {arr.time()}, {direction} :{v[1], v[2], v[3]}'
                 f.write(msg+'\n')
                 print(msg)
 
@@ -55,4 +60,4 @@ def main():
 if __name__ == '__main__':
     while(True):
         main()
-        time.sleep(100)
+        # time.sleep(100)

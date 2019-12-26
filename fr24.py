@@ -33,10 +33,7 @@ def area(bounds):
     )
     r = requests.get('https://data-live.flightradar24.com/zones/fcgi/feed.js',
                      headers=headers, params=params)
-    # print(r.url)
-
     j = r.json()
-    # print(j)
     return j
 
 
@@ -66,13 +63,11 @@ def detail(bounds, ix):
 
     try:
         j = r.json()
-        print(j)
-        # ems = j['selected-aircraft']['ems']
-        # alt = ems['AGPS']
-        # wind = ems['WIND']
+        assigned = j[ix]
 
-        # return alt, wind
+        ems = j['selected-aircraft']['ems']
 
+        return assigned[3:6]
     except KeyError as e:
         pass
 
@@ -90,9 +85,6 @@ def arrtime(ix):
         j = r.json()
         arr = j['time']['estimated']['arrival']
 
-        # for k, v in j.items():
-        #     print(k, v)
-        #     print('--')
         return arr
     except KeyError as e:
         pass
@@ -105,6 +97,6 @@ if __name__ == '__main__':
     bounds = '71.81,-35.85,21.19,-82.17'
     # j = area(bounds)
     # print(j)
-    ix = '234bcb93'
+    ix = '234c2a8a'
     r = detail(bounds, ix)
     print(r)
