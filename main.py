@@ -80,7 +80,7 @@ def main():
             plt.scatter(south['ts'], len(south) *
                         [-0.1], marker='^', alpha=0.33)
             plt.gca().set_ylim([-5, 5])
-            plt.savefig('t.png')
+            plt.savefig('timeline.png', bbox_inches='tight')
 
     except JSONDecodeError as e:
         print(e)
